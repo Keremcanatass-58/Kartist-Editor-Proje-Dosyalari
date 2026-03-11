@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartist – Sprint 1 & 2 Teknik Rapor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --surface2: #16161e;
+            --border: rgba(255,255,255,0.06);
+            --accent: #c6ff00;
+            --accent-dim: rgba(198,255,0,0.08);
+            --accent-glow: rgba(198,255,0,0.15);
+            --text: #e8e8ee;
+            --muted: #666;
+            --danger: #ff5566;
+            --info: #38bdf8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+        .cover::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 800px 400px at 30% 70%, rgba(198,255,0,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 300px at 70% 30%, rgba(198,255,0,0.04) 0%, transparent 70%);
+        }
+        .cover-logo {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .cover-logo span { color: var(--accent); }
+        .cover-subtitle {
+            font-size: 1.3rem;
+            color: var(--muted);
+            font-weight: 300;
+            margin-bottom: 50px;
+        }
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-glow);
+            color: var(--accent);
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+        }
+        .cover-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cover-desc {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+        .cover-meta {
+            display: flex;
+            gap: 30px;
+            color: #444;
+            font-size: 0.85rem;
+        }
+        .cover-meta span { display: flex; align-items: center; gap: 6px; }
+        .cover-meta i { color: var(--accent); }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* ===== TOC ===== */
+        .toc {
+            page-break-after: always;
+        }
+        .toc h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .toc h2 i { color: var(--accent); }
+        .toc-list { list-style: none; }
+        .toc-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .toc-list li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .toc-list li a:hover { color: var(--accent); }
+        .toc-section { color: var(--muted); font-size: 0.8rem; }
+
+        /* ===== SPRINT HEADER ===== */
+        .sprint-header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .sprint-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        .sprint-num {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-glow);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .sprint-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        .sprint-header p {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .sprint-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            font-size: 0.82rem;
+            color: #555;
+        }
+        .sprint-meta span { display: flex; align-items: center; gap: 6px; }
+        .sprint-meta i { color: var(--accent); font-size: 0.75rem; }
+
+        /* ===== FEATURE SECTION ===== */
+        .feature {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            transition: border-color 0.3s;
+        }
+        .feature:hover { border-color: var(--accent-glow); }
+        .feature-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+        .tag-security { background: rgba(255,85,102,0.1); color: var(--danger); border: 1px solid rgba(255,85,102,0.15); }
+        .tag-ui { background: rgba(56,189,248,0.1); color: var(--info); border: 1px solid rgba(56,189,248,0.15); }
+        .tag-realtime { background: rgba(34,197,94,0.1); color: var(--success); border: 1px solid rgba(34,197,94,0.15); }
+        .tag-ux { background: rgba(245,158,11,0.1); color: var(--warning); border: 1px solid rgba(245,158,11,0.15); }
+
+        .feature h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .feature h3 i { color: var(--accent); font-size: 1rem; }
+
+        .feature p {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        /* ===== CODE BLOCK ===== */
+        .code-block {
+            background: #0d0d14;
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+        .code-block .file-name {
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .code-block pre {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            color: #ccc;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .code-block .keyword { color: #c792ea; }
+        .code-block .string { color: #c3e88d; }
+        .code-block .comment { color: #546e7a; font-style: italic; }
+        .code-block .func { color: #82aaff; }
+        .code-block .type { color: #ffcb6b; }
+        .code-block .number { color: #f78c6c; }
+
+        /* ===== BULLET LIST ===== */
+        .detail-list {
+            list-style: none;
+            padding: 0;
+        }
+        .detail-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #bbb;
+        }
+        .detail-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* ===== TABLE ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.85rem;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            background: var(--surface2);
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: #bbb;
+        }
+        .data-table tr:hover td { background: rgba(255,255,255,0.01); }
+
+        /* ===== ARCHITECTURE DIAGRAM ===== */
+        .arch-diagram {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .arch-box {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            min-width: 120px;
+        }
+        .arch-box.highlight {
+            border-color: var(--accent-glow);
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+        .arch-arrow {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 50px 0;
+        }
+
+        /* ===== SUMMARY BOX ===== */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(198,255,0,0.04), rgba(198,255,0,0.01));
+            border: 1px solid var(--accent-glow);
+            border-left: 4px solid var(--accent);
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin: 24px 0;
+        }
+        .summary-box h4 {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .summary-box p {
+            color: #aaa;
+            font-size: 0.88rem;
+        }
+
+        /* ===== SCREENSHOT ===== */
+        .screenshot-container {
+            margin: 28px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .screenshot-container img {
+            width: 100%;
+            display: block;
+        }
+        .screenshot-label {
+            position: absolute;
+            bottom: 16px; left: 16px;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(198,255,0,0.15);
+        }
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .screenshot-grid .screenshot-container {
+            margin: 0;
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            *, *::before, *::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                margin: 8mm;
+                size: A4;
+            }
+
+            @page :first {
+                margin: 0;
+            }
+
+            body {
+                background: #0a0a0f !important;
+                color: #e8e8ee !important;
+                font-size: 11pt;
+                line-height: 1.5;
+            }
+
+            /* --- KAPAK --- */
+            .cover {
+                min-height: 100vh;
+                padding: 60px 40px;
+                background: #0a0a0f !important;
+                color: #fff !important;
+                page-break-after: always;
+                border-radius: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+            .cover::before { display: none !important; }
+            .cover-logo { font-size: 3rem; color: #fff !important; }
+            .cover-logo span { color: #c6ff00 !important; }
+            .cover-subtitle { color: #999 !important; }
+            .cover-title {
+                font-size: 2rem;
+                background: none !important;
+                -webkit-text-fill-color: #fff !important;
+                color: #fff !important;
+            }
+            .cover-desc { color: #aaa !important; }
+            .cover-badge {
+                background: rgba(198,255,0,0.15) !important;
+                color: #c6ff00 !important;
+                border-color: rgba(198,255,0,0.3) !important;
+            }
+            .cover-meta span { color: #888 !important; }
+            .cover-meta i { color: #c6ff00 !important; }
+
+            /* --- GENEL CONTAINER --- */
+            .container {
+                padding: 20px 0 !important;
+                max-width: 100% !important;
+            }
+
+            /* --- İÇİNDEKİLER --- */
+            .toc {
+                page-break-after: always;
+            }
+            .toc h2 { color: #fff !important; }
+            .toc h2 i { color: #c6ff00 !important; }
+            .toc-list li a { color: #e8e8ee !important; }
+            .toc-section { color: #666 !important; }
+            .toc-list li { border-color: rgba(255,255,255,0.06) !important; }
+
+            /* --- SPRINT HEADER --- */
+            .sprint-header {
+                background: #111118 !important;
+                border: 1px solid rgba(255,255,255,0.06) !important;
+                border-radius: 12px !important;
+                padding: 24px !important;
+                margin-bottom: 24px !important;
+                page-break-after: avoid;
+                break-inside: avoid;
+            }
+            .sprint-header::before {
+                background: linear-gradient(90deg, #c6ff00, transparent) !important;
+            }
+            .sprint-header h2 { color: #fff !important; }
+            .sprint-header p { color: #666 !important; }
+            .sprint-num {
+                background: rgba(198,255,0,0.08) !important;
+                color: #c6ff00 !important;
+                border-color: rgba(198,255,0,0.15) !important;
+            }
+            .sprint-meta span { color: #555 !important; }
+            .sprint-meta i { color: #c6ff00 !important; }
+
+            /* --- FEATURE BOX --- */
+            .feature {
+                background: #111118 !important;
+                border: 1px solid rgba(255,255,255,0.06) !important;
+                border-radius: 10px !important;
+                padding: 20px 24px !important;
+                margin-bottom: 16px !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .feature h3 { color: #fff !important; font-size: 1rem !important; }
+            .feature h3 i { color: #c6ff00 !important; }
+            .feature p { color: #999 !important; }
+
+            /* --- TAGS --- */
+            .tag-security {
+                background: rgba(255,85,102,0.1) !important;
+                color: #ff5566 !important;
+                border: 1px solid rgba(255,85,102,0.15) !important;
+            }
+            .tag-ui {
+                background: rgba(56,189,248,0.1) !important;
+                color: #38bdf8 !important;
+                border: 1px solid rgba(56,189,248,0.15) !important;
+            }
+            .tag-realtime {
+                background: rgba(34,197,94,0.1) !important;
+                color: #22c55e !important;
+                border: 1px solid rgba(34,197,94,0.15) !important;
+            }
+            .tag-ux {
+                background: rgba(245,158,11,0.1) !important;
+                color: #f59e0b !important;
+                border: 1px solid rgba(245,158,11,0.15) !important;
+            }
+
+            /* --- CODE BLOCK --- */
+            .code-block {
+                background: #0d0d14 !important;
+                border: 1px solid rgba(255,255,255,0.04) !important;
+                border-radius: 8px !important;
+                padding: 14px !important;
+                font-size: 8pt !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .code-block .file-name { color: #c6ff00 !important; }
+            .code-block pre { color: #ccc !important; }
+            .code-block .keyword { color: #c792ea !important; }
+            .code-block .string { color: #c3e88d !important; }
+            .code-block .comment { color: #546e7a !important; }
+            .code-block .func { color: #82aaff !important; }
+            .code-block .type { color: #ffcb6b !important; }
+            .code-block .number { color: #f78c6c !important; }
+
+            /* --- LISTE --- */
+            .detail-list li { color: #bbb !important; font-size: 10pt !important; }
+            .detail-list li::before { background: #c6ff00 !important; }
+            .detail-list li strong { color: #fff !important; }
+
+            /* --- TABLO --- */
+            .data-table { font-size: 9pt !important; }
+            .data-table th {
+                background: #16161e !important;
+                color: #c6ff00 !important;
+                border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+            }
+            .data-table td {
+                color: #bbb !important;
+                border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+            }
+
+            /* --- MİMARİ DİYAGRAM --- */
+            .arch-diagram {
+                background: #111118 !important;
+                border: 1px solid rgba(255,255,255,0.06) !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .arch-diagram strong { color: #c6ff00 !important; }
+            .arch-box {
+                background: #16161e !important;
+                border: 1px solid rgba(255,255,255,0.06) !important;
+                color: #e8e8ee !important;
+            }
+            .arch-box.highlight {
+                background: rgba(198,255,0,0.08) !important;
+                border-color: rgba(198,255,0,0.15) !important;
+                color: #c6ff00 !important;
+            }
+            .arch-arrow { color: #c6ff00 !important; }
+
+            /* --- SUMMARY BOX --- */
+            .summary-box {
+                background: rgba(198,255,0,0.03) !important;
+                border: 1px solid rgba(198,255,0,0.15) !important;
+                border-left: 4px solid #c6ff00 !important;
+                break-inside: avoid;
+            }
+            .summary-box h4 { color: #c6ff00 !important; }
+            .summary-box p { color: #aaa !important; }
+
+            /* --- SCREENSHOTS --- */
+            .screenshot-container {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid rgba(255,255,255,0.06) !important;
+                box-shadow: none !important;
+                margin: 16px 0 !important;
+            }
+            .screenshot-label {
+                background: rgba(0,0,0,0.75) !important;
+                color: #c6ff00 !important;
+            }
+            .screenshot-grid {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* --- DIVIDER --- */
+            .divider {
+                background: rgba(255,255,255,0.06) !important;
+                margin: 20px 0 !important;
+            }
+
+            /* --- PAGE BREAKS --- */
+            .page-break {
+                page-break-before: always !important;
+            }
+        }
+
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== KAPAK ==================== -->
+    <section class="cover">
+        <div class="cover-logo">KART<span>IST</span></div>
+        <div class="cover-subtitle">Profesyonel Dijital Kart Tasarım Platformu</div>
+        <div class="cover-badge"><i class="fa-solid fa-bolt"></i> FİNAL ÖDEVİ — SPRİNT RAPORU</div>
+        <h1 class="cover-title">Sprint 1 & Sprint 2<br>Teknik Geliştirme Raporu</h1>
+        <p class="cover-desc">
+            Bu rapor, Kartist web uygulamasının Sprint 1 (Güvenlik & Profiller) ve Sprint 2 (UI Kişiselleştirme & Canlı Destek) kapsamında yapılan tüm teknik geliştirmeleri detaylı olarak açıklamaktadır.
+        </p>
+        <div class="cover-meta">
+            <span><i class="fa-regular fa-calendar"></i> Mart 2026</span>
+            <span><i class="fa-solid fa-code-branch"></i> ASP.NET Core 9</span>
+            <span><i class="fa-solid fa-database"></i> MSSQL + Dapper</span>
+        </div>
+    </section>
+
+    <!-- ==================== İÇİNDEKİLER ==================== -->
+    <section class="container toc">
+        <h2><i class="fa-solid fa-list"></i> İçindekiler</h2>
+        <ul class="toc-list">
+            <li><a href="#s1">Sprint 1: Güvenlik ve Profiller</a> <span class="toc-section">Hafta 1–2</span></li>
+            <li><a href="#s1-1">&nbsp;&nbsp;&nbsp;&nbsp;1.1 SecurityHeaders Middleware (CSP, XSS, Clickjacking)</a></li>
+            <li><a href="#s1-2">&nbsp;&nbsp;&nbsp;&nbsp;1.2 InputValidator — SQL Injection & XSS Koruması</a></li>
+            <li><a href="#s1-3">&nbsp;&nbsp;&nbsp;&nbsp;1.3 Brute Force Koruması & Hesap Kilitleme</a></li>
+            <li><a href="#s1-4">&nbsp;&nbsp;&nbsp;&nbsp;1.4 İki Faktörlü Kimlik Doğrulama (2FA)</a></li>
+            <li><a href="#s1-5">&nbsp;&nbsp;&nbsp;&nbsp;1.5 Giriş Loglama Sistemi</a></li>
+            <li><a href="#s1-6">&nbsp;&nbsp;&nbsp;&nbsp;1.6 Gelişmiş Profil Dashboard Tasarımı</a></li>
+            <li style="margin-top: 10px;"><a href="#s2">Sprint 2: UI Kişiselleştirme & Destek</a> <span class="toc-section">Hafta 3–4</span></li>
+            <li><a href="#s2-1">&nbsp;&nbsp;&nbsp;&nbsp;2.1 Editör Arayüz Kişiselleştirme (Tema & Yerleşim)</a></li>
+            <li><a href="#s2-2">&nbsp;&nbsp;&nbsp;&nbsp;2.2 SignalR Canlı Destek (Live Chat)</a></li>
+            <li><a href="#tech">Teknik Mimari & Teknoloji Yığını</a></li>
+            <li><a href="#db">Veritabanı Şeması</a></li>
+        </ul>
+    </section>
+
+    <!-- ==================== PROJE GÖRSELLERİ ==================== -->
+    <section class="container">
+        <div class="sprint-header">
+            <div class="sprint-num"><i class="fa-solid fa-image"></i> PROJE GÖRSELLERİ</div>
+            <h2>Uygulama Arayüz Görselleri</h2>
+            <p>Kartist platformunun ana sayfa, giriş, kayıt ve tasarım editörü ekranları.</p>
+        </div>
+
+        <div class="screenshot-container">
+            <img src="rapor_gorseller/anasayfa.png" alt="Kartist Ana Sayfa">
+            <div class="screenshot-label"><i class="fa-solid fa-home"></i> Ana Sayfa — Landing Page</div>
+        </div>
+
+        <div class="screenshot-grid">
+            <div class="screenshot-container">
+                <img src="rapor_gorseller/giris.png" alt="Giriş Sayfası">
+                <div class="screenshot-label"><i class="fa-solid fa-right-to-bracket"></i> Giriş Sayfası</div>
+            </div>
+            <div class="screenshot-container">
+                <img src="rapor_gorseller/kayit.png" alt="Kayıt Sayfası">
+                <div class="screenshot-label"><i class="fa-solid fa-user-plus"></i> Kayıt Sayfası</div>
+            </div>
+        </div>
+
+        <div class="screenshot-container">
+            <img src="rapor_gorseller/editor.png" alt="Tasarım Editörü">
+            <div class="screenshot-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Tasarım Editörü — Fabric.js Canvas</div>
+        </div>
+    </section>
+
+    <!-- ==================== SPRINT 1 ==================== -->
+    <section class="container">
+        <div class="sprint-header" id="s1">
+            <div class="sprint-num"><i class="fa-solid fa-shield-halved"></i> SPRİNT 1</div>
+            <h2>Güvenlik ve Profiller</h2>
+            <p>Sistemin kale gibi sağlamlaştırılması ve kullanıcı deneyiminin kişiselleştirilmesi.</p>
+            <div class="sprint-meta">
+                <span><i class="fa-regular fa-calendar"></i> Hafta 1–2</span>
+                <span><i class="fa-solid fa-code"></i> 6 Özellik</span>
+                <span><i class="fa-solid fa-file-code"></i> 5+ Dosya Değişikliği</span>
+            </div>
+        </div>
+
+        <!-- 1.1 Security Headers -->
+        <div class="feature" id="s1-1">
+            <span class="feature-tag tag-security">SİBER GÜVENLİK</span>
+            <h3><i class="fa-solid fa-shield-halved"></i> SecurityHeaders Middleware</h3>
+            <p>
+                Tüm HTTP yanıtlarına güvenlik başlıkları ekleyen özel bir ASP.NET Core middleware geliştirildi. 
+                Bu katman, uygulamayı XSS, Clickjacking, MIME Sniffing ve diğer yaygın web saldırılarına karşı korur.
+            </p>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Middleware/SecurityHeadersMiddleware.cs</div>
+<pre><span class="comment">// Her HTTP yanıtına eklenen güvenlik başlıkları</span>
+context.Response.Headers.Append(<span class="string">"X-XSS-Protection"</span>, <span class="string">"1; mode=block"</span>);
+context.Response.Headers.Append(<span class="string">"X-Frame-Options"</span>, <span class="string">"SAMEORIGIN"</span>);
+context.Response.Headers.Append(<span class="string">"X-Content-Type-Options"</span>, <span class="string">"nosniff"</span>);
+context.Response.Headers.Append(<span class="string">"Referrer-Policy"</span>, <span class="string">"strict-origin-when-cross-origin"</span>);
+
+<span class="comment">// Content Security Policy — hangi kaynakların yükleneceğini kontrol eder</span>
+<span class="keyword">string</span> csp = <span class="string">"default-src 'self'; script-src 'self' ..."</span>;
+context.Response.Headers.Append(<span class="string">"Content-Security-Policy"</span>, csp);
+
+<span class="comment">// Sunucu bilgisi ifşasını engelle</span>
+context.Response.Headers.Remove(<span class="string">"Server"</span>);
+context.Response.Headers.Remove(<span class="string">"X-Powered-By"</span>);</pre>
+            </div>
+
+            <ul class="detail-list">
+                <li><strong>X-XSS-Protection:</strong> Tarayıcının yerleşik XSS filtrelerini aktif eder</li>
+                <li><strong>X-Frame-Options:</strong> Clickjacking saldırılarını engeller, sadece aynı origin iframe'e izin verir</li>
+                <li><strong>Content-Security-Policy:</strong> Script, style, font, image, connect gibi kaynakların whitelist'ini belirler</li>
+                <li><strong>Permissions-Policy:</strong> Geolocation, kamera, mikrofon gibi API'lere erişimi kapatır</li>
+                <li><strong>Sunucu Bilgisi Gizleme:</strong> Server ve X-Powered-By header'ları kaldırılarak teknoloji ifşası engellenir</li>
+                <li><strong>Performans:</strong> Statik dosyalar (CSS, JS, img) için header ekleme atlanarak performans optimize edildi</li>
+            </ul>
+        </div>
+
+        <!-- 1.2 Input Validator -->
+        <div class="feature" id="s1-2">
+            <span class="feature-tag tag-security">SİBER GÜVENLİK</span>
+            <h3><i class="fa-solid fa-filter"></i> InputValidator — Girdi Doğrulama Sistemi</h3>
+            <p>
+                Kullanıcı girdilerini SQL Injection ve XSS saldırılarına karşı filtreleyen merkezi bir doğrulama sınıfı oluşturuldu.
+                Tüm controller'larda kullanıcı girdisi alınan her noktada bu validator kullanılıyor.
+            </p>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Helpers/InputValidator.cs</div>
+<pre><span class="keyword">public static</span> <span class="type">string</span> <span class="func">SanitizeHtml</span>(<span class="type">string</span> input) {
+    <span class="comment">// &lt;script&gt;, &lt;iframe&gt;, onclick= gibi tehlikeli içerikleri temizler</span>
+    input = Regex.Replace(input, <span class="string">@"&lt;script[^&gt;]*&gt;[\s\S]*?&lt;/script&gt;"</span>, <span class="string">""</span>);
+    input = Regex.Replace(input, <span class="string">@"javascript\s*:"</span>, <span class="string">""</span>);
+    <span class="keyword">return</span> input.Trim();
+}
+
+<span class="keyword">public static</span> <span class="type">bool</span> <span class="func">IsValidInput</span>(<span class="type">string</span> input) {
+    <span class="comment">// SQL anahtar kelimelerini (UNION, SELECT, DROP vb.) kontrol eder</span>
+    <span class="type">string[]</span> dangerousChars = { <span class="string">"'"</span>, <span class="string">"--"</span>, <span class="string">"union"</span>, <span class="string">"select"</span>, <span class="string">"drop"</span>, ... };
+    <span class="comment">// ...</span>
+}</pre>
+            </div>
+
+            <table class="data-table">
+                <tr><th>Metod</th><th>İşlevi</th></tr>
+                <tr><td><code>SanitizeHtml()</code></td><td>HTML etiketlerini, script bloklarını ve event handler'ları temizler</td></tr>
+                <tr><td><code>IsValidInput()</code></td><td>SQL Injection anahtar kelimelerini tespit eder</td></tr>
+                <tr><td><code>IsValidPrompt()</code></td><td>AI prompt'larında XSS pattern'lerini kontrol eder</td></tr>
+                <tr><td><code>IsValidEmail()</code></td><td>E-posta formatını RFC standardına göre doğrular</td></tr>
+                <tr><td><code>IsValidImageFile()</code></td><td>Yüklenen dosya uzantısını whitelist'e göre kontrol eder</td></tr>
+                <tr><td><code>SanitizeForDisplay()</code></td><td>HTML encode yaparak güvenli görüntüleme sağlar</td></tr>
+            </table>
+        </div>
+
+        <!-- 1.3 Brute Force -->
+        <div class="feature" id="s1-3">
+            <span class="feature-tag tag-security">SİBER GÜVENLİK</span>
+            <h3><i class="fa-solid fa-lock"></i> Brute Force Koruması & Hesap Kilitleme</h3>
+            <p>
+                Giriş sayfasında art arda başarısız giriş denemelerini tespit eden ve belirli bir eşik aşıldığında hesabı geçici olarak kilitleyen bir mekanizma geliştirildi.
+            </p>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Controllers/AccountController.cs — Giriş Metodu</div>
+<pre><span class="comment">// Başarısız giriş sayacını artır</span>
+<span class="keyword">int</span> yeniSayac = (user.BasarisizGirisSayisi ?? <span class="number">0</span>) + <span class="number">1</span>;
+
+<span class="keyword">if</span> (yeniSayac >= <span class="number">5</span>) {  <span class="comment">// 5 başarısız deneme sonrası kilitle</span>
+    db.Execute(<span class="string">"UPDATE Kullanicilar SET BasarisizGirisSayisi = @s, 
+    HesapKilitliMi = 1, KilitBitisTarihi = @t WHERE Email = @e"</span>,
+    <span class="keyword">new</span> { s = yeniSayac, t = DateTime.Now.AddMinutes(<span class="number">15</span>), e = email });
+}
+
+<span class="comment">// Başarılı girişte sayacı sıfırla</span>
+db.Execute(<span class="string">"UPDATE Kullanicilar SET BasarisizGirisSayisi = 0 WHERE Email = @e"</span>);</pre>
+            </div>
+
+            <ul class="detail-list">
+                <li><strong>5 başarısız deneme</strong> sonrası hesap <strong>15 dakika</strong> süreyle kilitlenir</li>
+                <li>Başarılı giriş yapıldığında sayaç otomatik olarak <strong>sıfırlanır</strong></li>
+                <li>Kilit süresi dolduğunda hesap otomatik olarak <strong>açılır</strong></li>
+                <li>Veritabanında <code>BasarisizGirisSayisi</code>, <code>HesapKilitliMi</code> ve <code>KilitBitisTarihi</code> kolonları ile takip edilir</li>
+            </ul>
+        </div>
+
+        <!-- 1.4 2FA -->
+        <div class="feature" id="s1-4">
+            <span class="feature-tag tag-security">SİBER GÜVENLİK</span>
+            <h3><i class="fa-solid fa-envelope-circle-check"></i> İki Faktörlü Kimlik Doğrulama (2FA)</h3>
+            <p>
+                E-posta tabanlı 2FA sistemi geliştirildi. Kullanıcılar profil ayarlarından 2FA'yı aktif ettiklerinde, her giriş denemesinde e-postalarına tek kullanımlık doğrulama kodu gönderilir.
+            </p>
+
+            <div class="arch-diagram">
+                <strong style="color: var(--accent); font-size: 0.8rem; letter-spacing: 1px;">2FA AKIŞ DİYAGRAMI</strong>
+                <div class="arch-flow">
+                    <div class="arch-box">Kullanıcı<br>Email + Şifre</div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box highlight">Şifre<br>Doğrulama</div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">6 Haneli Kod<br>E-posta Gönder</div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box highlight">Kod<br>Doğrulama</div>
+                    <div class="arch-arrow">→</div>
+                    <div class="arch-box">Oturum<br>Açılır ✅</div>
+                </div>
+            </div>
+
+            <ul class="detail-list">
+                <li><strong>IkiFactorKodlari</strong> tablosunda kodlar saklanır (Email, Kod, BitisTarihi, Kullanildi)</li>
+                <li>Kodların <strong>geçerlilik süresi</strong> vardır, süresi dolan kodlar kabul edilmez</li>
+                <li><strong>"Tekrar Gönder"</strong> özelliği — spam engeli ile birlikte (60 sn bekleme)</li>
+                <li>Kullanılan kodlar <code>Kullanildi = 1</code> olarak işaretlenir, tekrar kullanılamaz</li>
+                <li>Profil sayfasından <strong>tek tıkla açma/kapama</strong> (toggle switch)</li>
+                <li>Google ile giriş yapan kullanıcılar için de 2FA desteği</li>
+            </ul>
+
+            <div class="screenshot-container" style="margin-top: 20px;">
+                <img src="rapor_gorseller/giris.png" alt="Giriş Sayfası — Google OAuth ve 2FA">
+                <div class="screenshot-label"><i class="fa-solid fa-lock"></i> Giriş Sayfası — Google OAuth + 2FA Korumalı</div>
+            </div>
+        </div>
+
+        <!-- 1.5 Giriş Loglama -->
+        <div class="feature" id="s1-5">
+            <span class="feature-tag tag-security">SİBER GÜVENLİK</span>
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Giriş Loglama Sistemi</h3>
+            <p>
+                Her giriş denemesi (başarılı veya başarısız), IP adresi ve User-Agent bilgisiyle birlikte GirisLoglari tablosuna kaydedilir. Bu, şüpheli aktivitelerin tespitini sağlar.
+            </p>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Controllers/AccountController.cs</div>
+<pre>db.Execute(<span class="string">@"INSERT INTO GirisLoglari 
+    (KullaniciEmail, IpAdresi, BasariliMi, UserAgent) 
+    VALUES (@email, @ip, @basarili, @ua)"</span>,
+<span class="keyword">new</span> { email, ip = remoteIp, basarili = basariliMi, ua = userAgent });</pre>
+            </div>
+
+            <table class="data-table">
+                <tr><th>Kolon</th><th>Veri Tipi</th><th>Açıklama</th></tr>
+                <tr><td>KullaniciEmail</td><td>NVARCHAR(256)</td><td>Giriş deneyen kullanıcının e-postası</td></tr>
+                <tr><td>IpAdresi</td><td>NVARCHAR(50)</td><td>İstemcinin IP adresi</td></tr>
+                <tr><td>BasariliMi</td><td>BIT</td><td>Giriş başarılı mı?</td></tr>
+                <tr><td>Tarih</td><td>DATETIME</td><td>İşlem zamanı (UTC)</td></tr>
+                <tr><td>UserAgent</td><td>NVARCHAR(500)</td><td>Tarayıcı/cihaz bilgisi</td></tr>
+            </table>
+        </div>
+
+        <!-- 1.6 Profil Dashboard -->
+        <div class="feature" id="s1-6">
+            <span class="feature-tag tag-ux">DENEYİM</span>
+            <h3><i class="fa-solid fa-user-astronaut"></i> Gelişmiş Profil Dashboard Tasarımı</h3>
+            <p>
+                Kullanıcıların profillerini portfolyo gibi sergileyebileceği, modern ve premium hissiyatlı bir dashboard tasarlandı. 
+                Glassmorphism efektleri, animasyonlu istatistik kartları ve responsive tab yapısı kullanıldı.
+            </p>
+
+            <ul class="detail-list">
+                <li><strong>Hero Banner:</strong> Radial gradient ve floating orb animasyonlarıyla dinamik karşılama alanı</li>
+                <li><strong>Profil Kartı:</strong> Glassmorphism efektli, -70px margin ile hero üzerine taşan modern kart</li>
+                <li><strong>İstatistik Kartları:</strong> Proje, Favori, Satış, Paylaşım sayılarını animasyonlu sayaçla gösteren 4'lü grid</li>
+                <li><strong>Tab Sistemi:</strong> Projelerim / Favoriler / Ayarlar arasında geçiş yapan modern tab navigation</li>
+                <li><strong>Proje Kartları:</strong> Hover'da scale efekti, overlay gradient, düzenle/kopyala/sil butonları</li>
+                <li><strong>Ayarlar Paneli:</strong> Şifre değiştirme, biyografi düzenleme (canlı karakter sayacı), 2FA toggle</li>
+                <li><strong>Responsive:</strong> 920px ve 600px breakpoint'lerinde otomatik layout adaptasyonu</li>
+            </ul>
+
+            <div class="summary-box">
+                <h4><i class="fa-solid fa-palette"></i> Tasarım Kararları</h4>
+                <p>
+                    Dark tema (#0a0a0f arka plan) üzerine neon yeşil (#c6ff00) vurgu rengi kullanıldı. 
+                    Inter font ailesi, subtle animasyonlar (slide-up, fade-in) ve hover micro-interaction'lar 
+                    ile premium bir kullanıcı deneyimi hedeflendi. CSS değişkenleriyle (custom properties) 
+                    tutarlı bir tasarım sistemi oluşturuldu.
+                </p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ==================== SPRINT 2 ==================== -->
+        <div class="sprint-header page-break" id="s2">
+            <div class="sprint-num"><i class="fa-solid fa-wand-magic-sparkles"></i> SPRİNT 2</div>
+            <h2>UI Kişiselleştirme & Destek</h2>
+            <p>Kullanıcıların kendi çalışma alanlarını yönetebilmesi ve anında destek alması.</p>
+            <div class="sprint-meta">
+                <span><i class="fa-regular fa-calendar"></i> Hafta 3–4</span>
+                <span><i class="fa-solid fa-code"></i> 2 Ana Özellik</span>
+                <span><i class="fa-solid fa-file-code"></i> 3+ Dosya Değişikliği</span>
+            </div>
+        </div>
+
+        <!-- 2.1 Editör Kişiselleştirme -->
+        <div class="feature" id="s2-1">
+            <span class="feature-tag tag-ui">ARAYÜZ KİŞİSELLEŞTİRME</span>
+            <h3><i class="fa-solid fa-sliders"></i> Editör Arayüz Kişiselleştirme</h3>
+            <p>
+                Tasarım editöründe kullanıcıların çalışma tarzına göre arayüzü özelleştirebilmesi sağlandı. 
+                Araç kutusu yerleşimi (sol/sağ) ve karanlık/neon tema seçenekleri localStorage ile kalıcı hale getirildi.
+            </p>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Views/Home/Tasarim.cshtml — Editör Tercihleri</div>
+<pre><span class="comment">// Kullanıcı tercihlerini localStorage'dan yükle</span>
+<span class="keyword">function</span> <span class="func">initEditorPrefs</span>() {
+    <span class="keyword">const</span> theme = localStorage.getItem(<span class="string">'editorTheme'</span>) || <span class="string">'dark'</span>;
+    <span class="keyword">const</span> toolsSide = localStorage.getItem(<span class="string">'toolsSide'</span>) || <span class="string">'left'</span>;
+    
+    <span class="comment">// Tema uygula</span>
+    document.body.classList.toggle(<span class="string">'light-theme'</span>, theme === <span class="string">'light'</span>);
+    
+    <span class="comment">// Araç kutusu konumunu değiştir</span>
+    <span class="keyword">if</span> (toolsSide === <span class="string">'right'</span>) {
+        document.querySelector(<span class="string">'.main-body'</span>).classList.add(<span class="string">'layout-tools-right'</span>);
+    }
+}</pre>
+            </div>
+
+            <ul class="detail-list">
+                <li><strong>Araç Kutusu Yerleşimi:</strong> Sol veya sağ tarafa taşıyabilme — <code>layout-tools-right</code> CSS sınıfıyla grid-template-areas değişimi</li>
+                <li><strong>Tema Desteği:</strong> Karanlık (varsayılan) ve aydınlık tema seçenekleri</li>
+                <li><strong>localStorage Kalıcılığı:</strong> Tercihler tarayıcıda saklanır, her girişte hatırlanır</li>
+                <li><strong>Responsive Editör:</strong> Masaüstü, tablet ve mobil cihazlarda adaptive layout</li>
+                <li><strong>Ayarlar Sekmesi:</strong> Sidebar'daki "Ayar" tabından tüm tercihleri yönetme</li>
+            </ul>
+
+            <div class="summary-box">
+                <h4><i class="fa-solid fa-info-circle"></i> Teknik Detay</h4>
+                <p>
+                    Editör, <strong>Fabric.js</strong> kütüphanesiyle canvas manipülasyonu yapıyor. 
+                    Canvas üzerinde metin ekleme, şekil çizme, resim yükleme, QR kod oluşturma, 
+                    katman yönetimi, undo/redo ve buluta kaydetme gibi gelişmiş özellikler mevcut.
+                    Responsive tasarım için 480px, 768px, 992px breakpoint'lerinde farklı layout'lar uygulanıyor.
+                </p>
+            </div>
+
+            <div class="screenshot-container" style="margin-top: 20px;">
+                <img src="rapor_gorseller/editor.png" alt="Tasarım Editörü">
+                <div class="screenshot-label"><i class="fa-solid fa-sliders"></i> Editör Arayüzü — Kişiselleştirilebilir Layout</div>
+            </div>
+        </div>
+
+        <!-- 2.2 SignalR -->
+        <div class="feature" id="s2-2">
+            <span class="feature-tag tag-realtime">SIGNAL-R CANLI DESTEK</span>
+            <h3><i class="fa-solid fa-comments"></i> SignalR Canlı Destek Sistemi (Live Chat)</h3>
+            <p>
+                Kullanıcıların tasarım yaparken sistem yöneticilerine anında ulaşabileceği, 
+                gerçek zamanlı bir canlı sohbet sistemi SignalR hub yapısıyla geliştirildi.
+            </p>
+
+            <div class="arch-diagram">
+                <strong style="color: var(--accent); font-size: 0.8rem; letter-spacing: 1px;">SİGNALR MİMARİSİ</strong>
+                <div class="arch-flow">
+                    <div class="arch-box">Kullanıcı<br>(Editör Sayfası)</div>
+                    <div class="arch-arrow">⇄</div>
+                    <div class="arch-box highlight">SignalR<br>AdminHub</div>
+                    <div class="arch-arrow">⇄</div>
+                    <div class="arch-box">Admin<br>(Yönetim Paneli)</div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Hubs/AdminHub.cs</div>
+<pre><span class="keyword">public class</span> <span class="type">AdminHub</span> : <span class="type">Hub</span>
+{
+    <span class="comment">// Kullanıcı mesajı → Adminlere ilet</span>
+    <span class="keyword">public async</span> Task <span class="func">SendUserMessage</span>(<span class="type">string</span> email, <span class="type">string</span> message) {
+        <span class="keyword">var</span> payload = <span class="keyword">new</span> { from = <span class="string">"user"</span>, email, message = cleanMessage };
+        <span class="keyword">await</span> Clients.Group(<span class="string">"admins"</span>).SendAsync(<span class="string">"SupportMessage"</span>, payload);
+        <span class="keyword">await</span> Clients.Group(email).SendAsync(<span class="string">"SupportMessage"</span>, payload);
+    }
+
+    <span class="comment">// Admin yanıtı → Kullanıcıya ilet</span>
+    <span class="keyword">public async</span> Task <span class="func">SendAdminMessage</span>(<span class="type">string</span> email, <span class="type">string</span> message) {
+        <span class="keyword">var</span> payload = <span class="keyword">new</span> { from = <span class="string">"admin"</span>, email, message = cleanMessage };
+        <span class="keyword">await</span> Clients.Group(<span class="string">"admins"</span>).SendAsync(<span class="string">"SupportMessage"</span>, payload);
+        <span class="keyword">await</span> Clients.Group(email).SendAsync(<span class="string">"SupportMessage"</span>, payload);
+    }
+}</pre>
+            </div>
+
+            <ul class="detail-list">
+                <li><strong>Gerçek Zamanlı İletişim:</strong> WebSocket tabanlı anında mesajlaşma, sayfa yenileme gerektirmez</li>
+                <li><strong>Grup Bazlı Yönlendirme:</strong> Her kullanıcı kendi email grubuna, adminler "admins" grubuna katılır</li>
+                <li><strong>Çift Yönlü:</strong> <code>SendUserMessage</code> ve <code>SendAdminMessage</code> metotlarıyla iki yönlü iletişim</li>
+                <li><strong>Oturum Doğrulama:</strong> <code>OnConnectedAsync</code>'te admin oturumu kontrol edilerek rol bazlı erişim sağlanır</li>
+                <li><strong>Spam Koruması:</strong> İstemci tarafında duplicate mesaj tespiti — 1.5 saniye içinde aynı mesajı engeller</li>
+                <li><strong>UI Entegrasyonu:</strong> Editör sayfasında sağ altta Spotify benzeri destek widget'ı, badge ile okunmamış mesaj göstergesi</li>
+            </ul>
+
+            <div class="code-block">
+                <div class="file-name"><i class="fa-solid fa-file-code"></i> Program.cs — SignalR Kaydı</div>
+<pre>builder.Services.AddSignalR();  <span class="comment">// DI Container'a SignalR ekle</span>
+app.MapHub&lt;<span class="type">AdminHub</span>&gt;(<span class="string">"/adminHub"</span>);  <span class="comment">// Hub endpoint'ini tanımla</span></pre>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ==================== TEKNİK MİMARİ ==================== -->
+        <div class="sprint-header page-break" id="tech">
+            <div class="sprint-num"><i class="fa-solid fa-cubes"></i> TEKNİK</div>
+            <h2>Teknoloji Yığını & Mimari</h2>
+            <p>Projede kullanılan teknolojiler ve mimari kararlar.</p>
+        </div>
+
+        <table class="data-table">
+            <tr><th>Katman</th><th>Teknoloji</th><th>Sürüm / Not</th></tr>
+            <tr><td>Backend Framework</td><td>ASP.NET Core MVC</td><td>.NET 9</td></tr>
+            <tr><td>ORM / Data Access</td><td>Dapper (Micro-ORM)</td><td>Parametrized queries ile SQL Injection koruması</td></tr>
+            <tr><td>Veritabanı</td><td>Microsoft SQL Server</td><td>MSSQL — Dapper ile bağlantı</td></tr>
+            <tr><td>Gerçek Zamanlı</td><td>SignalR</td><td>WebSocket tabanlı canlı iletişim</td></tr>
+            <tr><td>Kimlik Doğrulama</td><td>Cookie Authentication + Google OAuth</td><td>2FA desteğiyle</td></tr>
+            <tr><td>Frontend</td><td>Vanilla JS + Fabric.js</td><td>Canvas editörü için</td></tr>
+            <tr><td>CSS</td><td>Custom CSS + CSS Variables</td><td>Dark theme, glassmorphism, responsive</td></tr>
+            <tr><td>Güvenlik</td><td>Custom Middleware + InputValidator</td><td>CSP, XSS, CSRF koruması</td></tr>
+            <tr><td>CSRF Koruması</td><td>AntiForgeryToken</td><td>AutoValidateAntiforgeryToken global filtre</td></tr>
+            <tr><td>Sıkıştırma</td><td>Brotli + Gzip</td><td>Response compression middleware</td></tr>
+        </table>
+
+        <div class="divider"></div>
+
+        <!-- ==================== VERİTABANI ==================== -->
+        <div class="sprint-header" id="db">
+            <div class="sprint-num"><i class="fa-solid fa-database"></i> VERİTABANI</div>
+            <h2>Sprint 1-2 Kapsamında Eklenen Tablolar & Kolonlar</h2>
+            <p>Program.cs içindeki EnsureDatabaseSchema metodu ile otomatik oluşturulan şema değişiklikleri.</p>
+        </div>
+
+        <div class="feature">
+            <h3><i class="fa-solid fa-table"></i> Kullanicilar Tablosu — Yeni Kolonlar</h3>
+            <table class="data-table">
+                <tr><th>Kolon</th><th>Tip</th><th>Sprint</th><th>Açıklama</th></tr>
+                <tr><td>BasarisizGirisSayisi</td><td>INT</td><td>Sprint 1</td><td>Art arda başarısız giriş sayısı</td></tr>
+                <tr><td>HesapKilitliMi</td><td>BIT</td><td>Sprint 1</td><td>Hesap kilitli mi?</td></tr>
+                <tr><td>KilitBitisTarihi</td><td>DATETIME</td><td>Sprint 1</td><td>Kilidin otomatik açılacağı tarih</td></tr>
+                <tr><td>IkiFactorAktif</td><td>BIT</td><td>Sprint 1</td><td>2FA aktif mi?</td></tr>
+                <tr><td>Biyografi</td><td>NVARCHAR(500)</td><td>Sprint 1</td><td>Kullanıcı bio metni</td></tr>
+                <tr><td>ProfilResmi</td><td>NVARCHAR(500)</td><td>Sprint 1</td><td>Profil fotoğrafı URL'i</td></tr>
+                <tr><td>UyelikBitisTarihi</td><td>DATETIME</td><td>Sprint 1</td><td>PRO üyelik bitiş tarihi</td></tr>
+            </table>
+        </div>
+
+        <div class="feature">
+            <h3><i class="fa-solid fa-table"></i> Yeni Tablolar</h3>
+            <table class="data-table">
+                <tr><th>Tablo</th><th>Sprint</th><th>Açıklama</th></tr>
+                <tr><td>IkiFactorKodlari</td><td>Sprint 1</td><td>2FA doğrulama kodları (Email, Kod, BitisTarihi, Kullanildi)</td></tr>
+                <tr><td>GirisLoglari</td><td>Sprint 1</td><td>Tüm giriş denemelerinin logu (Email, IP, Başarı, UserAgent, Tarih)</td></tr>
+            </table>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ==================== SONUÇ ==================== -->
+        <div class="summary-box" style="margin-top: 40px;">
+            <h4><i class="fa-solid fa-flag-checkered"></i> Sonuç</h4>
+            <p>
+                Sprint 1 ve Sprint 2 kapsamında Kartist platformuna <strong>6 güvenlik özelliği</strong> 
+                (Security Headers Middleware, InputValidator, Brute Force koruması, 2FA, Giriş loglama, CSRF), 
+                <strong>gelişmiş profil dashboard'u</strong>, <strong>editör kişiselleştirme</strong> ve 
+                <strong>SignalR canlı destek</strong> sistemi başarıyla entegre edilmiştir. 
+                Tüm özellikler, veritabanı şeması otomatik güncelleme (EnsureDatabaseSchema) mekanizmasıyla 
+                uyumlu çalışmakta ve responsive tasarımla mobil cihazlarda da sorunsuz şekilde kullanılabilmektedir.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px; padding-bottom: 60px; color: #333; font-size: 0.8rem;">
+            <p>Bu rapor Kartist geliştirme ekibi tarafından hazırlanmıştır.</p>
+            <p style="margin-top: 6px;">© 2026 Kartist — Tüm hakları saklıdır.</p>
+        </div>
+
+    </section>
+
+</body>
+</html>
